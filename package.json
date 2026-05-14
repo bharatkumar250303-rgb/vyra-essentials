@@ -1,6 +1,11 @@
 {
+  "name": "vyra-essentials",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "ejs": "^5.0.2",
     "express": "^5.2.1"
   }
 }
