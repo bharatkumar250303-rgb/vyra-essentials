@@ -10,5 +10,7 @@ const prebookSchema = new mongoose.Schema({
     timestamps: true
 });
 
+prebookSchema.index({ email: 1, productSlug: 1 }, { unique: true });
+
 const Prebook = mongoose.model('Prebook', prebookSchema);
 export default Prebook;

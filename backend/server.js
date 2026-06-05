@@ -111,6 +111,14 @@ async function seedDatabase() {
 app.post('/api/prebook', async (req, res) => {
     try {
         if (mongoose.connection.readyState === 1) {
+            // Check if this email already prebooked the same product
+            const existing = await Prebook.findOne({
+                email: req.body.email,
+                productSlug: req.body.productSlug
+            });
+            if (existing) {
+                return res.status(409).json({ message: 'already_prebooked' });
+            }
             const newPrebook = new Prebook(req.body);
             await newPrebook.save();
         } else {
@@ -118,6 +126,10 @@ app.post('/api/prebook', async (req, res) => {
         }
         res.status(201).json({ message: 'Successfully prebooked!' });
     } catch (error) {
+        // Handle duplicate key error from the unique index as a fallback
+        if (error.code === 11000) {
+            return res.status(409).json({ message: 'already_prebooked' });
+        }
         console.error('Prebook error:', error);
         res.status(500).json({ message: 'Failed to register prebooking.' });
     }
