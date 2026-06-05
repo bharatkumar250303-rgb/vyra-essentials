@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import Product from './models/Product.js';
+import Prebook from './models/Prebook.js';
 
 dotenv.config();
 
@@ -23,43 +24,125 @@ mongoose.connect(MONGO_URI)
   });
 
 const initialProducts = [
-    { slug: 'guasha-brush', name: 'Guasha Brush', category: 'Skin Care', price: 1299, image: 'https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?q=80&w=1000&auto=format&fit=crop', description: 'A sculpting facial massage tool designed to support circulation.' },
-    { slug: 'sunscreen-blush', name: 'Sunscreen Blush', category: 'Makeup', price: 999, image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1000&auto=format&fit=crop', description: 'Radiant blush with skincare-inspired sun protection.' },
-    { slug: 'hair-mask', name: 'Single Use Hair Mask', category: 'Hair Care', price: 699, image: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=1000&auto=format&fit=crop', description: 'Deep nourishment treatment for smooth shiny hair.' },
-    { slug: 'gua-sha-body-cream', name: 'Gua Sha Massage Body Cream', category: 'Body Care', price: 1499, image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1000&auto=format&fit=crop', description: 'Hydrating body cream designed for massage rituals.' },
-    { slug: 'sheet-mask-tub', name: '1 Day Sheet Mask Tub', category: 'Skin Care', price: 1799, image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?q=80&w=1000&auto=format&fit=crop', description: 'Daily hydration masks for glowing refreshed skin.' },
-    { slug: 'lifting-toner-pads', name: 'Lifting Toner Pads', category: 'Skin Care', price: 1199, image: 'https://images.unsplash.com/photo-1626784215021-2e39ccf971cd?q=80&w=1000&auto=format&fit=crop', description: 'Gentle exfoliating toner pads for smoother skin.' },
-    { slug: 'collagen-patches', name: 'Dissolvable Collagen Patches', category: 'Treatments', price: 1899, image: 'https://images.unsplash.com/photo-1629198735660-e39ea93f5c18?q=80&w=1000&auto=format&fit=crop', description: 'Collagen patches for targeted nourishment and care.' },
-    { slug: 'hydrocolloid-patches', name: 'Hydrocolloid Face Patches', category: 'Acne Care', price: 899, image: 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=1000&auto=format&fit=crop', description: 'Protective acne patches designed for recovery.' },
-    { slug: 'ear-seeds', name: 'Ear Seeds', category: 'Wellness', price: 799, image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=1000&auto=format&fit=crop', description: 'Pressure point wellness patches for relaxation.' },
-    { slug: 'led-face-mask', name: 'LED Face Mask', category: 'Beauty Device', price: 4999, image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1000&auto=format&fit=crop', description: 'LED skincare device for brighter healthier-looking skin.' }
+    {
+        slug: 'single-use-hair-mask',
+        name: 'Single-Use Hair Mask',
+        category: 'Hair Care',
+        price: null,
+        image: '/products/single-use-hair-mask.webp',
+        description: 'A single-use rice and keratin hair inner treatment cream with keratin, provitamin B5 and hyaluron. Designed for use before straightening, curling or coloring.'
+    },
+    {
+        slug: 'cooling-toner-pad',
+        name: 'Cooling Toner Pad',
+        category: 'Skin Care',
+        price: null,
+        image: '/products/cooling-toner-pad.webp',
+        description: 'Real Centella Cica cooling water-fit toner pads for calming, soothing and moisturizing care. Each pack includes 4 pads with 10 ml of toner.'
+    },
+    {
+        slug: 'hair-brush-cleaner',
+        name: 'Hair Brush Cleaner',
+        category: 'Hair Care',
+        price: null,
+        image: '/products/hair-brush-cleaner.webp',
+        description: 'A compact hair brush cleaner with firm bristles for lifting trapped hair, lint and buildup from styling brushes and combs.'
+    },
+    {
+        slug: 'sebum-nose-strips',
+        name: 'Pore-Refining Sebum Nose Strips',
+        category: 'Skin Care',
+        price: null,
+        image: '/products/sebum-nose-strips.webp',
+        description: 'Single-use sebum nose strip made for sensitive skin. Helps remove blackheads and impurities, absorb excess sebum, and shrink and refine pores with a gentle botanical-extract formula.'
+    },
+    {
+        slug: 'retinol-pore-lifting-toner-pad',
+        name: 'Retinol Pore Lifting Toner Pad',
+        category: 'Skin Care',
+        price: null,
+        image: '/products/retinol-pore-lifting-toner-pad.webp',
+        description: 'Retinol toner pads formulated to plump and smooth the skin while supporting deep-pore and lifting care. Use across the face after cleansing or as a 10-minute spot treatment.'
+    },
+    {
+        slug: 'hydrocolloid-dressing-roll',
+        name: 'Hydrocolloid Dressing Roll',
+        category: 'Acne Care',
+        price: null,
+        image: '/products/hydrocolloid-dressing-roll.webp',
+        description: 'Medical-grade hydrocolloid dressing roll that supports natural healing, protects against dirt and absorbs excess moisture. Breathable, comfortable and customizable in size and shape.'
+    },
+    {
+        slug: 'anti-aging-butterfly-mask',
+        name: 'Anti-Aging Butterfly Mask',
+        category: 'Eye Care',
+        price: null,
+        image: '/products/anti-aging-butterfly-mask.webp',
+        description: 'Pro-xylane eye-zone butterfly masks for fine lines and anti-wrinkle care. Each box includes 5 masks enriched with pro-xylane, alcohol, triple hyaluronic acid, collagen and ectoin.'
+    },
+    {
+        slug: 'yogurt-sunscreen',
+        name: 'Yogurt Single-Use Sunscreen',
+        category: 'Sun Care',
+        price: null,
+        image: '/products/yogurt-sunscreen.webp',
+        description: 'Single-use yogurt sunscreen with SPF 50+ PA++++ and vitamin C. Lightweight, non-sticky and made for clear, bright-looking skin with 0% UV, 0% alcohol and 0% chemical claims on the pack.'
+    }
 ];
 
 async function seedDatabase() {
     try {
-        const count = await Product.countDocuments();
-        if (count === 0) {
-            await Product.insertMany(initialProducts);
-            console.log('Database seeded with initial products.');
-        }
+        const slugs = initialProducts.map(product => product.slug);
+        await Product.deleteMany({ slug: { $nin: slugs } });
+        await Product.bulkWrite(initialProducts.map(product => ({
+            updateOne: {
+                filter: { slug: product.slug },
+                update: { $set: product },
+                upsert: true
+            }
+        })));
+        console.log('Product catalog synced.');
     } catch (error) {
         console.error('Error seeding database:', error);
     }
 }
 
 // API Routes
+app.post('/api/prebook', async (req, res) => {
+    try {
+        if (mongoose.connection.readyState === 1) {
+            const newPrebook = new Prebook(req.body);
+            await newPrebook.save();
+        } else {
+            console.log('Database not connected. Mock saved prebook:', req.body);
+        }
+        res.status(201).json({ message: 'Successfully prebooked!' });
+    } catch (error) {
+        console.error('Prebook error:', error);
+        res.status(500).json({ message: 'Failed to register prebooking.' });
+    }
+});
+
 app.get('/api/products', async (req, res) => {
+    if (mongoose.connection.readyState !== 1) {
+        console.log('Database not connected, serving mock products.');
+        return res.json(initialProducts);
+    }
     try {
         const products = await Product.find({});
         res.json(products);
     } catch (error) {
         console.error(error);
-        // Fallback for when Mongo isn't connected
         res.json(initialProducts);
     }
 });
 
 app.get('/api/products/:slug', async (req, res) => {
+    if (mongoose.connection.readyState !== 1) {
+        console.log(`Database not connected, serving mock product for ${req.params.slug}.`);
+        const product = initialProducts.find(p => p.slug === req.params.slug);
+        return product ? res.json(product) : res.status(404).json({ message: 'Product not found' });
+    }
     try {
         const product = await Product.findOne({ slug: req.params.slug });
         if (product) {

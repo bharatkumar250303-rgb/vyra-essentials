@@ -7,9 +7,9 @@ function Cart({ cart, updateQuantity, removeFromCart }) {
 
   return (
     <>
-      <header className="navbar" style={{ textAlign: 'center', padding: '40px 0' }}>
+      <header className="navbar">
         <h1>Your Cart</h1>
-        <Link to="/" className="cart-btn btn btn-dark" style={{ display: 'inline-block', marginTop: '10px' }}>
+        <Link to="/" className="cart-btn btn btn-dark" style={{ display: 'inline-block', marginTop: '20px' }}>
           Continue Shopping
         </Link>
       </header>
@@ -44,7 +44,7 @@ function Cart({ cart, updateQuantity, removeFromCart }) {
               </div>
 
               <div className="total-box">
-                {discount > 0 && <p style={{ fontSize: '18px', color: '#00a2a2', marginBottom: '10px' }}>Discount applied: -₹{discount}</p>}
+                {discount > 0 && <p style={{ fontSize: '18px', color: 'var(--accent-color)', marginBottom: '10px' }}>Discount applied: -₹{discount}</p>}
                 Total: ₹<span id="total-price">{finalTotal}</span>
                 <br />
                 <button className="checkout-btn">

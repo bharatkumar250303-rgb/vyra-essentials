@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PrebookModal from '../components/PrebookModal';
 
 function Home({ addToCart }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handlePrebookClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const formatPrice = (price) => (
+    typeof price === 'number' ? `₹${price}` : 'Price on launch'
+  );
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,9 +45,9 @@ function Home({ addToCart }) {
             </p>
           </div>
           <div className="hero-image-wrapper">
-            <img 
-              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop" 
-              className="hero-image" 
+            <img
+              src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop"
+              className="hero-image"
               alt="Hero"
             />
           </div>
@@ -51,22 +63,18 @@ function Home({ addToCart }) {
             <div className="products-grid">
               {products.map((product) => (
                 <div className="product-card" key={product.slug}>
-                  <div className="product-image-container">
+                  <Link to={`/product/${product.slug}`} className="product-image-container">
                     <img src={product.image} alt={product.name} className="product-img" />
-                  </div>
+                  </Link>
                   <div className="product-info">
                     <span className="product-category">{product.category}</span>
-                    <h3 className="product-name">{product.name}</h3>
-                    <p className="product-price">₹{product.price}</p>
+                    <Link to={`/product/${product.slug}`} className="product-name-link">
+                      <h3 className="product-name">{product.name}</h3>
+                    </Link>
+                    <p className="product-price">{formatPrice(product.price)}</p>
                     <div className="button-group">
-                      <Link to={`/product/${product.slug}`} className="btn btn-dark">
-                        View Product
-                      </Link>
-                      <button 
-                        className="btn btn-primary" 
-                        onClick={() => addToCart(product)}
-                      >
-                        Add To Cart
+                      <button className="btn btn-primary" onClick={() => handlePrebookClick(product)}>
+                        Prebook
                       </button>
                     </div>
                   </div>
@@ -76,6 +84,12 @@ function Home({ addToCart }) {
           )}
         </div>
       </section>
+
+      <PrebookModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={selectedProduct}
+      />
     </>
   );
 }

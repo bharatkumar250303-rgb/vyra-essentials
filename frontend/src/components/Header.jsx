@@ -5,7 +5,7 @@ function Header() {
     <header className="header">
       <div className="container header-container">
         <Link to="/" className="logo">
-          VYRA
+          Prime Drops
         </Link>
         <nav className="nav">
           <ul className="nav-list">
