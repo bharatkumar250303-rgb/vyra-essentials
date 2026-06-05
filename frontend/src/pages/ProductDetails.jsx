@@ -3,11 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import PrebookModal from '../components/PrebookModal';
 import { API_BASE_URL } from '../config/api';
+import { FiArrowLeft, FiDroplet, FiGlobe, FiBox } from 'react-icons/fi';
 
 const PERKS = [
-  { icon: '🌿', label: 'Clean Formula' },
-  { icon: '🇰🇷', label: 'K-Beauty Origin' },
-  { icon: '📦', label: 'Early Access' },
+  { icon: <FiDroplet />, label: 'Clean Formula' },
+  { icon: <FiGlobe />, label: 'K-Beauty Origin' },
+  { icon: <FiBox />, label: 'Early Access' },
 ];
 
 function ProductDetails() {
@@ -83,8 +84,8 @@ function ProductDetails() {
 
           {/* Content */}
           <div className="product-page-content">
-            <Link to="/" className="product-page-back">
-              ← Back to collection
+            <Link to="/" className="product-page-back" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <FiArrowLeft /> Back to collection
             </Link>
 
             <span className="product-page-category">{product.category}</span>

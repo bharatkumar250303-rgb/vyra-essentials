@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5050;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/vyra';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/primedrops';
 
 mongoose.connect(MONGO_URI)
   .then(() => {

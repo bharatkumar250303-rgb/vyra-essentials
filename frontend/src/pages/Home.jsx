@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PrebookModal from '../components/PrebookModal';
 import { API_BASE_URL } from '../config/api';
+import { FiArrowDown } from 'react-icons/fi';
 
 function Home() {
   const [products, setProducts] = useState([]);
@@ -75,7 +76,9 @@ function Home() {
             <div className="hero-actions">
               <a href="#products" className="hero-cta">
                 Explore Collection
-                <span className="hero-cta-arrow">↓</span>
+                <span className="hero-cta-arrow" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <FiArrowDown />
+                </span>
               </a>
 
               <div className="hero-stat">

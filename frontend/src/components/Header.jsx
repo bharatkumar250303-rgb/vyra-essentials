@@ -9,7 +9,7 @@ function Header() {
       <div className="container header-container">
         <Link to="/" className="logo">
           <span className="logo-dot" />
-          Vyra
+          Prime Drops
         </Link>
         <nav className="nav">
           <ul className="nav-list">

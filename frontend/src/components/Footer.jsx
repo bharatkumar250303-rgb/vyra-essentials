@@ -7,15 +7,15 @@ function Footer() {
     <footer className="footer">
       <div className="container">
         <div className="footer-inner">
-          <Link to="/" className="footer-logo">Vyra</Link>
+          <Link to="/" className="footer-logo">Prime Drops</Link>
 
           <p className="footer-text">
-            © {year} Vyra Essentials. All rights reserved.
+            © {year} Prime Drops. All rights reserved.
           </p>
 
           <ul className="footer-links">
             <li><a href="/#products">Products</a></li>
-            <li><a href="mailto:hello@vyra.in">Contact</a></li>
+            <li><a href="mailto:hello@primedrops.in">Contact</a></li>
           </ul>
         </div>
       </div>
