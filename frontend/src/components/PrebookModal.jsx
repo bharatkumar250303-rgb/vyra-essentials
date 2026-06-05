@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 function PrebookModal({ isOpen, onClose, product }) {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
@@ -12,7 +13,7 @@ function PrebookModal({ isOpen, onClose, product }) {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/prebook', {
+      await axios.post(`${API_BASE_URL}/api/prebook`, {
         ...formData,
         productSlug: product.slug,
         productName: product.name

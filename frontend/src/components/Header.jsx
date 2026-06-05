@@ -15,9 +15,6 @@ function Header() {
             <li>
               <a href="/#products" className="nav-link">Products</a>
             </li>
-            <li>
-              <Link to="/cart" className="nav-link">Cart 🛒</Link>
-            </li>
           </ul>
         </nav>
       </div>

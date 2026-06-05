@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PrebookModal from '../components/PrebookModal';
+import { API_BASE_URL } from '../config/api';
 
-function Home({ addToCart }) {
+function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -21,7 +22,7 @@ function Home({ addToCart }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get(`${API_BASE_URL}/api/products`);
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
